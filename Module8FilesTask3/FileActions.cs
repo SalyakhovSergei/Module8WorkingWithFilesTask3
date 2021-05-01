@@ -17,18 +17,26 @@ namespace Module8FilesTask3
 
             if (dirInfo.Exists)
             {
-                foreach (FileInfo file in FI)
+                try
                 {
-                    TimeSpan fileTime = DateTime.Now - file.CreationTime;
-                    if (fileTime.Minutes > 2)
+                    foreach (FileInfo file in FI)
                     {
-                        file.Delete();
+                        TimeSpan fileTime = DateTime.Now - file.CreationTime;
+                        if (fileTime.Minutes > 2)
+                        {
+                            file.Delete();
+                        }
+                    }
+                    foreach (DirectoryInfo DI in directories)
+                    {
+                        DeleteFiles(DI.FullName);
                     }
                 }
-                foreach (DirectoryInfo DI in directories)
+                catch (IOException e)
                 {
-                    DeleteFiles(DI.FullName);
+                    Console.WriteLine(e.Message);
                 }
+                
             }
         }
 
@@ -41,14 +49,22 @@ namespace Module8FilesTask3
 
             if (dirInfo.Exists)
             {
-                foreach (FileInfo file in FI)
+                try
                 {
-                    allFileSize += file.Length;
+                    foreach (FileInfo file in FI)
+                    {
+                        allFileSize += file.Length;
+                    }
+                    foreach (DirectoryInfo DI in directories)
+                    {
+                        allFileSize += FileSizeCount(DI.FullName);
+                    }
                 }
-                foreach (DirectoryInfo DI in directories)
+                catch (IOException e)
                 {
-                    allFileSize += FileSizeCount(DI.FullName);
+                    Console.WriteLine(e.Message);
                 }
+
             }
             return allFileSize;
         }

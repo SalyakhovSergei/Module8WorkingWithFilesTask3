@@ -13,7 +13,6 @@ namespace Module8FilesTask3
             test.DeleteFiles("C:/Users/Анатолий/Desktop/testFolder");
             Console.WriteLine($"Текущий размер папки: {test.FileSizeCount("C:/Users/Анатолий/Desktop/testFolder")}");
 
-
         }
     }
 }
